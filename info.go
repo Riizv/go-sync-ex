@@ -46,13 +46,27 @@ func getip2() string {
 }
 
 
-func SetUniqueID(){
+// func SetUniqueID(){
 
+// }
+
+func WhatOS() string {
+	var sysKind string = runtime.GOOS
+	var osName string;
+	switch sysKind {
+		case "windows":
+			osName = "Windows"
+		case "darwin":
+			osName = "MacOS"
+		case "linux":
+			osName = "Linux"
+	}
+	return osName
 }
 
 func main(){
 	fmt.Println("Informations about you: ")
-	fmt.Println("Operating system: " + runtime.GOOS)
+	fmt.Println("Operating system: " + WhatOS())
 	fmt.Println("Architecture: " + runtime.GOARCH)
 	fmt.Println("Shell:", os.Getenv("SHELL"))
 	fmt.Println("IP: " + GetOutboundIP().String())
