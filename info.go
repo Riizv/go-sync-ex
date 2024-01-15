@@ -57,10 +57,7 @@ func getip2() string {
 }
 
 // func SetUniqueID(){
-
 // }
-
-//TODO: paste good code from laptop
 
 func WhatOS() string {
 	var sysKind string = runtime.GOOS
