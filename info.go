@@ -38,7 +38,7 @@ type IP struct {
 	Query string
 }
 
-func getip2() string {
+func PubIPaddr() string {
 	req, err := http.Get("http://ip-api.com/json/")
 	if err != nil {
 		return err.Error()
@@ -81,7 +81,7 @@ func main() {
 	fmt.Println("Architecture: " + runtime.GOARCH)
 	fmt.Println("Shell:", os.Getenv("SHELL"))
 	fmt.Println("IP: " + GetOutboundIP().String())
-	fmt.Println("Public IP: " + getip2())
+	fmt.Println("Public IP: " + PubIPaddr())
 	time.Sleep(3 * time.Second)
 
 	ThreadedHandler()
