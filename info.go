@@ -56,7 +56,9 @@ func PubIPaddr() string {
 	return ip.Query
 }
 
-// func SetUniqueID(){
+// func SetUniqueID() string {
+//	var uniqueIDsecurePhrase = 
+// make this shit works
 // }
 
 func WhatOS() string {
@@ -83,7 +85,7 @@ func main() {
 	fmt.Println("IP: " + GetOutboundIP().String())
 	fmt.Println("Public IP: " + PubIPaddr())
 	time.Sleep(3 * time.Second)
+	fmt.Println(time.Now())
 
 	ThreadedHandler()
-
 }
