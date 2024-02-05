@@ -10,16 +10,21 @@ import (
 	"os"
 	"runtime"
 	"time"
+	"reflect"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
-}
-
-func ThreadedHandler() {
-	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
-	time.Sleep(100 * time.Millisecond)
+func WhatOS() string {
+	var sysKind string = runtime.GOOS
+	var osName string
+	switch sysKind {
+	case "windows":
+		osName = "Windows"
+	case "darwin":
+		osName = "MacOS"
+	case "linux":
+		osName = "Linux"
+	}
+	return osName
 }
 
 func GetOutboundIP() net.IP {
@@ -57,22 +62,19 @@ func PubIPaddr() string {
 }
 
 // func SetUniqueID() string {
-//	var uniqueIDsecurePhrase = 
+//	var uniqueIDsecurePhrase =
 // make this shit works
 // }
 
-func WhatOS() string {
-	var sysKind string = runtime.GOOS
-	var osName string
-	switch sysKind {
-	case "windows":
-		osName = "Windows"
-	case "darwin":
-		osName = "MacOS"
-	case "linux":
-		osName = "Linux"
-	}
-	return osName
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+}
+
+func ThreadedHandler() {
+	http.HandleFunc("/", handler)
+	log.Fatal(http.ListenAndServe(":8080", nil))
+	time.Sleep(100 * time.Millisecond)
 }
 
 func main() {
@@ -85,7 +87,10 @@ func main() {
 	fmt.Println("IP: " + GetOutboundIP().String())
 	fmt.Println("Public IP: " + PubIPaddr())
 	time.Sleep(3 * time.Second)
-	fmt.Println(time.Now())
+	var tmt = time.Now()
+
+	fmt.Println(reflect.TypeOf(tmt))
+	fmt.Println(reflect.TypeOf(tmt.String()))
 
 	ThreadedHandler()
 }
