@@ -3,14 +3,14 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net"
 	"net/http"
 	"os"
 	"runtime"
 	"time"
-	"reflect"
+	//"reflect"
 	// "github.com/gin-gonic/gin"
 )
 
@@ -51,7 +51,7 @@ func PubIPaddr() string {
 	}
 	defer req.Body.Close()
 
-	body, err := ioutil.ReadAll(req.Body)
+	body, err := io.ReadAll(req.Body)
 	if err != nil {
 		return err.Error()
 	}
