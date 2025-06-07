@@ -11,6 +11,7 @@ import (
 	"runtime"
 	"time"
 	"reflect"
+	// "github.com/gin-gonic/gin"
 )
 
 func WhatOS() string {
@@ -63,7 +64,6 @@ func PubIPaddr() string {
 
 // func SetUniqueID() string {
 //	var uniqueIDsecurePhrase =
-// make this shit works
 // }
 
 
@@ -87,10 +87,8 @@ func main() {
 	fmt.Println("IP: " + GetOutboundIP().String())
 	fmt.Println("Public IP: " + PubIPaddr())
 	time.Sleep(3 * time.Second)
-	var tmt = time.Now()
-
-	fmt.Println(reflect.TypeOf(tmt))
-	fmt.Println(reflect.TypeOf(tmt.String()))
+	fmt.Println(time.Now())
+	
 
 	ThreadedHandler()
 }
