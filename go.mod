@@ -1,3 +1,5 @@
-module github.com/Riizv/go-sync-ex
+module example.com/sysinfo
 
-go 1.24.4
+go 1.22
+
+require github.com/google/uuid v1.5.0
