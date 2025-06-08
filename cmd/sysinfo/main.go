@@ -18,7 +18,9 @@ func main() {
 	port := flag.String("port", ":8080", "port na którym wystartuje serwer HTTP (np. ':8080')")
 	verbose := flag.Bool("verbose", false, "wypisz szczegóły systemu przy starcie")
 	flag.Parse()
-	//TODO: make verbose work and analyze it
+
+	//TODO: add new CLI params
+
 	// --- Informacje o systemie ---------------------------------------------
 	sysInfo, err := info.Collect()
 	if err != nil {
