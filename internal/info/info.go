@@ -105,6 +105,7 @@ func fetchPublicIP() (string, error) {
 	return msg.IP, nil
 }
 
+// TODO: Add UNIQE UUID and save to file, check before creating new one and hash this file
 func uuidNew() string {
 	// w razie braku entropii czy problemów z pkg uuid:
 	if id, err := uuid.NewRandom(); err == nil {
