@@ -38,6 +38,12 @@ func main() {
 	if *debug {
 		fmt.Println("Welcome to debug mode!")
 		fmt.Println("PID: ", os.Getpid())
+		hostname, err := os.Hostname()
+		if err != nil {
+			fmt.Println("Err durning retrieving hostname:", err)
+			return
+		}
+		fmt.Println("Hostname:", hostname)
 	}
 
 	// --- Konfiguracja serwera ----------------------------------------------
