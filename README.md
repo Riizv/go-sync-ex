@@ -5,6 +5,5 @@ go run ./cmd/sysinfo -port :9090 -verbose
 # App build
 
 ```shell
-chmod +x build.sh 
-./build.sh
+chmod +x build.sh && ./build.sh
 ```
