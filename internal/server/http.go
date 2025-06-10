@@ -10,8 +10,8 @@ import (
 )
 
 //TODO: Make server simpler
-// New zwraca wstępnie skonfigurowany http.Server
-func New(addr string, sys *info.Info) *http.Server {
+// zwraca wstępnie skonfigurowany http.Server
+func NewServerService(addr string, sys *info.Info) *http.Server {
 	mux := http.NewServeMux()
 
 	// Root – prosty tekst

@@ -22,7 +22,7 @@ func main() {
 	//TODO: add new CLI params
 
 	// --- Informacje o systemie ---------------------------------------------
-	sysInfo, err := info.Collect()
+	sysInfo, err := info.CollectBasicInfo()
 	if err != nil {
 		log.Printf("WARN: %v", err)
 	}
@@ -35,7 +35,7 @@ func main() {
 	}
 
 	// --- Konfiguracja serwera ----------------------------------------------
-	srv := server.New(*port, sysInfo)
+	srv := server.NewServerService(*port, sysInfo)
 
 	// --- Graceful shutdown --------------------------------------------------
 	ctx, stop := signal.NotifyContext(context.Background(),
@@ -49,7 +49,7 @@ func main() {
 	}()
 	log.Printf("Serwer wystartował na %s", *port)
 
-	<-ctx.Done() // czekamy na sygnał
+	<-ctx.Done() // czekamy na sygnał (co ta linijka robi? Sprawdzić.)
 	log.Printf("Otrzymano sygnał, zamykam...")
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()

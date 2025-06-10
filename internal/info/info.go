@@ -27,12 +27,12 @@ type Info struct {
 	Timestamp time.Time `json:"timestamp"`
 }
 
-func Collect() (*Info, error) {
+func CollectBasicInfo() (*Info, error) {
 	local, err := getOutboundIP()
 	if err != nil {
 		return nil, fmt.Errorf("local IP: %w", err)
 	}
-	public, _ := fetchPublicIP() // nie krytyczne – ignorujemy błąd
+	public, _ := fetchPublicIP()
 	return &Info{
 		OS:        whatOS(),
 		Version:   runtime.Version(),
@@ -56,7 +56,7 @@ func whatOS() string {
 	case "linux":
 		return "Linux"
 	default:
-		return runtime.GOOS // cokolwiek system zwrócił
+		return runtime.GOOS 
 	}
 }
 
