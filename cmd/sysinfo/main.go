@@ -17,25 +17,29 @@ func main() {
 	// --- CLI flags ----------------------------------------------------------
 	port := flag.String("port", ":8080", "port na którym wystartuje serwer HTTP (np. ':8080')")
 	verbose := flag.Bool("verbose", false, "wypisz szczegóły systemu przy starcie")
+	debug := flag.Bool("debug", false, "debug which show more informations")
 	flag.Parse()
 
 	//TODO: add new CLI params
 
 	// --- Informacje o systemie ---------------------------------------------
-	sysInfo, err := info.CollectBasicInfo()
+	systemInformation, err := info.CollectBasicInfo()
 	if err != nil {
 		log.Printf("WARN: %v", err)
 	}
 	if *verbose {
-		fmt.Printf("App built with %s\n", sysInfo.Version)
+		fmt.Printf("App built with %s\n", systemInformation.Version)
 		fmt.Printf("Operating system: %s\nArchitecture: %s\nShell: %s\n",
-			sysInfo.OS, sysInfo.Arch, sysInfo.Shell)
-		fmt.Printf("Local IP: %s | Public IP: %s\n", sysInfo.LocalIP, sysInfo.PublicIP)
-		fmt.Printf("UUID: %s\n", sysInfo.UUID)
+			systemInformation.OS, systemInformation.Arch, systemInformation.Shell)
+		fmt.Printf("Local IP: %s | Public IP: %s\n", systemInformation.LocalIP, systemInformation.PublicIP)
+		fmt.Printf("UUID: %s\n", systemInformation.UUID)
+	}
+	if *debug {
+		fmt.Println("Welcome to debug mode!")
 	}
 
 	// --- Konfiguracja serwera ----------------------------------------------
-	srv := server.NewServerService(*port, sysInfo)
+	srv := server.NewServerService(*port, systemInformation)
 
 	// --- Graceful shutdown --------------------------------------------------
 	ctx, stop := signal.NotifyContext(context.Background(),
