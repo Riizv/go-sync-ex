@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"os"
 	"os/signal"
 	"syscall"
 	"time"
@@ -36,6 +37,7 @@ func main() {
 	}
 	if *debug {
 		fmt.Println("Welcome to debug mode!")
+		fmt.Println("PID: ", os.Getpid())
 	}
 
 	// --- Konfiguracja serwera ----------------------------------------------
