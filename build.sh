@@ -22,3 +22,4 @@ else
     echo "❌ Błąd podczas budowania aplikacji"
     exit 1
 fi
+#TODO: translate it to enshlish
