@@ -36,14 +36,21 @@ func main() {
 		fmt.Printf("UUID: %s\n", systemInformation.UUID)
 	}
 	if *debug {
+		// group added for try it, not intended to be used on production
 		fmt.Println("Welcome to debug mode!")
 		fmt.Println("PID: ", os.Getpid())
-		hostname, err := os.Hostname()
-		if err != nil {
-			fmt.Println("Err durning retrieving hostname:", err)
+		// group, errg := os.Getgroups()
+		hostname, errh := os.Hostname()
+		if errh != nil {
+			fmt.Println("Err durning retrieving hostname:", errh)
 			return
 		}
+		// if errg != nil {
+		// 	fmt.Println("Err durning retrieving group", errg)
+		// 	return
+		// }
 		fmt.Println("Hostname:", hostname)
+		// fmt.Println("Groups: ", group)
 	}
 
 	// --- Konfiguracja serwera ----------------------------------------------
