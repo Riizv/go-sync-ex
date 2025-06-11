@@ -19,6 +19,8 @@ func main() {
 	port := flag.String("port", ":8080", "port na którym wystartuje serwer HTTP (np. ':8080')")
 	verbose := flag.Bool("verbose", false, "wypisz szczegóły systemu przy starcie")
 	debug := flag.Bool("debug", false, "debug which show more informations")
+	//silent := flag.Bool("silent", false, "silent mode")
+	//coldStart := flag.Bool("coldStart", false, "boot once again")
 	flag.Parse()
 
 	//TODO: add new CLI params
@@ -35,6 +37,8 @@ func main() {
 		fmt.Printf("Local IP: %s | Public IP: %s\n", systemInformation.LocalIP, systemInformation.PublicIP)
 		fmt.Printf("UUID: %s\n", systemInformation.UUID)
 	}
+
+
 	if *debug {
 		// group added for try it, not intended to be used on production
 		fmt.Println("Welcome to debug mode!")
