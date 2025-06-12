@@ -21,6 +21,7 @@ func main() {
 	debug := flag.Bool("debug", false, "debug which show more informations")
 	//silent := flag.Bool("silent", false, "silent mode")
 	//coldStart := flag.Bool("coldStart", false, "boot once again")
+	//healthCheck := flag.Bool("healthCheck", false, "health")
 	flag.Parse()
 
 	//TODO: add new CLI params
