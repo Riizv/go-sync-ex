@@ -9,7 +9,6 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
-
 	"example.com/sysinfo/internal/info"
 	"example.com/sysinfo/internal/server"
 )
