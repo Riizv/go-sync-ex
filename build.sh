@@ -5,17 +5,16 @@ OUTPUT_BIN="$OUTPUT_DIR/myapp"
 SOURCE_DIR="./cmd/sysinfo"
 
 if [ ! -d "$OUTPUT_DIR" ]; then
-    echo "Tworzenie katalogu $OUTPUT_DIR..."
+    echo "Creating directory $OUTPUT_DIR..."
     mkdir -p "$OUTPUT_DIR"
 fi
 
-echo "Budowanie aplikacji Go..."
+echo "Building go application..."
 go build -o "$OUTPUT_BIN" "$SOURCE_DIR"
 
 if [ $? -eq 0 ]; then
-    echo "Aplikacja została zbudowana jako $OUTPUT_BIN"
+    echo "Application was built as $OUTPUT_BIN"
 else
-    echo "Błąd podczas budowania aplikacji"
+    echo "Error durning building application"
     exit 1
 fi
-#TODO: translate it to enshlish
