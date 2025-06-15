@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"time"
 
-	"example.com/sysinfo/internal/info"
+	"github.com/Riizv/go-sync-ex/internal/info"
 )
 
-//TODO: Make server simpler
+// TODO: Make server simpler
 // zwraca wstępnie skonfigurowany http.Server
 func NewServerService(addr string, sys *info.Info) *http.Server {
 	mux := http.NewServeMux()

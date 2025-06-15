@@ -4,13 +4,13 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"github.com/Riizv/go-sync-ex/internal/info"
+	"github.com/Riizv/go-sync-ex/internal/server"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
-	"example.com/sysinfo/internal/info"
-	"example.com/sysinfo/internal/server"
 )
 
 func main() {
@@ -37,7 +37,6 @@ func main() {
 		fmt.Printf("Local IP: %s | Public IP: %s\n", systemInformation.LocalIP, systemInformation.PublicIP)
 		fmt.Printf("UUID: %s\n", systemInformation.UUID)
 	}
-
 
 	if *debug {
 		// group added for try it, not intended to be used on production
