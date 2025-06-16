@@ -18,6 +18,7 @@ func main() {
 	port := flag.String("port", ":8080", "port na którym wystartuje serwer HTTP (np. ':8080')")
 	verbose := flag.Bool("verbose", false, "wypisz szczegóły systemu przy starcie")
 	debug := flag.Bool("debug", false, "debug which show more informations")
+	serverStart := flag.Bool("serverStart", false, "starting server")
 	//silent := flag.Bool("silent", false, "silent mode")
 	//coldStart := flag.Bool("coldStart", false, "boot once again")
 	//healthCheck := flag.Bool("healthCheck", false, "health")
@@ -38,6 +39,7 @@ func main() {
 		fmt.Printf("UUID: %s\n", systemInformation.UUID)
 	}
 
+	// --- Debug mode ---------------------------------------------
 	if *debug {
 		// group added for try it, not intended to be used on production
 		fmt.Println("Welcome to debug mode!")
@@ -56,27 +58,30 @@ func main() {
 		// fmt.Println("Groups: ", group)
 	}
 
-	// --- Konfiguracja serwera ----------------------------------------------
-	srv := server.NewServerService(*port, systemInformation)
+	if *serverStart {
+		// --- Konfiguracja serwera ----------------------------------------------
+		srv := server.NewServerService(*port, systemInformation)
 
-	// --- Graceful shutdown --------------------------------------------------
-	ctx, stop := signal.NotifyContext(context.Background(),
-		syscall.SIGINT, syscall.SIGTERM)
-	defer stop()
+		// --- Graceful shutdown --------------------------------------------------
+		ctx, stop := signal.NotifyContext(context.Background(),
+			syscall.SIGINT, syscall.SIGTERM)
+		defer stop()
 
-	go func() { // uruchamiamy asynchronicznie
-		if err := srv.ListenAndServe(); err != nil && err != server.ErrSrvClosed {
-			log.Fatalf("server error: %v", err)
+		go func() { // uruchamiamy asynchronicznie
+			if err := srv.ListenAndServe(); err != nil && err != server.ErrSrvClosed {
+				log.Fatalf("server error: %v", err)
+			}
+		}()
+		log.Printf("Serwer wystartował na %s", *port)
+
+		<-ctx.Done() // czekamy na sygnał (co ta linijka robi? Sprawdzić.)
+		log.Printf("Otrzymano sygnał, zamykam...")
+		shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		if err := srv.Shutdown(shutdownCtx); err != nil {
+			log.Fatalf("graceful shutdown nie powiódł się: %v", err)
 		}
-	}()
-	log.Printf("Serwer wystartował na %s", *port)
-
-	<-ctx.Done() // czekamy na sygnał (co ta linijka robi? Sprawdzić.)
-	log.Printf("Otrzymano sygnał, zamykam...")
-	shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	if err := srv.Shutdown(shutdownCtx); err != nil {
-		log.Fatalf("graceful shutdown nie powiódł się: %v", err)
+		log.Println("Zamknięto poprawnie – do zobaczenia!")
 	}
-	log.Println("Zamknięto poprawnie – do zobaczenia!")
+
 }
