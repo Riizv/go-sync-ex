@@ -5,13 +5,13 @@ import (
 	"crypto/rand"
 	"encoding/json"
 	"fmt"
+	"github.com/google/uuid"
 	"io"
 	"net"
 	"net/http"
 	"os"
 	"runtime"
 	"time"
-	"github.com/google/uuid"
 )
 
 // Struct udostępniany przez /api/info
@@ -55,7 +55,7 @@ func whatOS() string {
 	case "linux":
 		return "Linux"
 	default:
-		return runtime.GOOS 
+		return runtime.GOOS
 	}
 }
 

@@ -26,7 +26,7 @@ func main() {
 
 	//TODO: add new CLI params
 
-	// --- Informacje o systemie ---------------------------------------------
+	// --- System informations ---------------------------------------------
 	systemInformation, err := info.CollectBasicInfo()
 	if err != nil {
 		log.Printf("WARN: %v", err)
@@ -41,25 +41,19 @@ func main() {
 
 	// --- Debug mode ---------------------------------------------
 	if *debug {
-		// group added for try it, not intended to be used on production
 		fmt.Println("Welcome to debug mode!")
 		fmt.Println("PID: ", os.Getpid())
-		// group, errg := os.Getgroups()
 		hostname, errh := os.Hostname()
 		if errh != nil {
 			fmt.Println("Err durning retrieving hostname:", errh)
 			return
 		}
-		// if errg != nil {
-		// 	fmt.Println("Err durning retrieving group", errg)
-		// 	return
-		// }
 		fmt.Println("Hostname:", hostname)
-		// fmt.Println("Groups: ", group)
+
 	}
 
 	if *serverStart {
-		// --- Konfiguracja serwera ----------------------------------------------
+		// --- Server configuration ----------------------------------------------
 		srv := server.NewServerService(*port, systemInformation)
 
 		// --- Graceful shutdown --------------------------------------------------
