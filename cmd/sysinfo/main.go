@@ -4,21 +4,22 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/Riizv/go-sync-ex/internal/info"
-	"github.com/Riizv/go-sync-ex/internal/server"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/Riizv/go-sync-ex/internal/info"
+	"github.com/Riizv/go-sync-ex/internal/server"
 )
 
 func main() {
 	// --- CLI flags ----------------------------------------------------------
-	port := flag.String("port", ":8080", "port na którym wystartuje serwer HTTP (np. ':8080')")
-	verbose := flag.Bool("verbose", false, "wypisz szczegóły systemu przy starcie")
-	debug := flag.Bool("debug", false, "debug which show more informations")
-	serverStart := flag.Bool("serverStart", false, "starting server")
+	port := flag.String("p", ":8080", "port na którym wystartuje serwer HTTP (np. ':8080')")
+	verbose := flag.Bool("v", false, "wypisz szczegóły systemu przy starcie")
+	debug := flag.Bool("d", false, "debug which show more informations")
+	serverStart := flag.Bool("sS", false, "starting server")
 	//silent := flag.Bool("silent", false, "silent mode")
 	//coldStart := flag.Bool("coldStart", false, "boot once again")
 	//healthCheck := flag.Bool("healthCheck", false, "health")
