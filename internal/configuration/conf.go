@@ -40,7 +40,12 @@ func InitConfig() {
 	if err != nil {
 		panic(err)
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+
+		}
+	}(file)
 
 	// Save to file
 	_, err = file.WriteString("OS: " + runtime.GOOS)
