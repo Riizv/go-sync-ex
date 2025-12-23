@@ -5,13 +5,14 @@ import (
 	"crypto/rand"
 	"encoding/json"
 	"fmt"
-	"github.com/google/uuid"
 	"io"
 	"net"
 	"net/http"
 	"os"
 	"runtime"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 // Struct udostępniany przez /api/info
@@ -72,7 +73,12 @@ func getOutboundIP() (net.IP, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer conn.Close()
+	defer func(conn net.Conn) {
+		err := conn.Close()
+		if err != nil {
+
+		}
+	}(conn)
 	return conn.LocalAddr().(*net.UDPAddr).IP, nil
 }
 
@@ -89,7 +95,12 @@ func fetchPublicIP() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+
+		}
+	}(resp.Body)
 
 	var msg struct {
 		IP string `json:"ip"`

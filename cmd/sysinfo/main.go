@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"log"
@@ -10,11 +11,15 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/Riizv/go-sync-ex/internal/configuration"
 	"github.com/Riizv/go-sync-ex/internal/info"
 	"github.com/Riizv/go-sync-ex/internal/server"
 )
 
 func main() {
+
+	configuration.ConfInit()
+
 	// --- CLI flags ----------------------------------------------------------
 	port := flag.String("p", ":8080", "port na którym wystartuje serwer HTTP (np. ':8080')")
 	verbose := flag.Bool("v", false, "wypisz szczegóły systemu przy starcie")
@@ -63,7 +68,7 @@ func main() {
 		defer stop()
 
 		go func() { // uruchamiamy asynchronicznie
-			if err := srv.ListenAndServe(); err != nil && err != server.ErrSrvClosed {
+			if err := srv.ListenAndServe(); err != nil && !errors.Is(err, server.ErrSrvClosed) {
 				log.Fatalf("server error: %v", err)
 			}
 		}()
