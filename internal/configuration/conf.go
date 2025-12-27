@@ -6,11 +6,27 @@ import (
 	"runtime"
 )
 
-func ConfInit() {
-	folderPath := "/opt/go-sync-ex.d"
-	filePath := folderPath + "/conf.init"
+func projectRootDirectory() string {
+	directoryPath := ""
 
-	err := os.MkdirAll(folderPath, 0755)
+	switch runtime.GOOS {
+	case "windows":
+		directoryPath = "C:\\Program Files (x86)\\go-sync-ex\\"
+	case "darwin":
+		directoryPath = "/opt/go-sync-ex.d"
+	case "linux":
+		directoryPath = "/opt/go-sync-ex.d"
+	default:
+		directoryPath = "opt/go-sync-ex.d"
+	}
+	return directoryPath
+}
+
+func ConfInit() {
+	directoryPath := projectRootDirectory()
+	filePath := directoryPath + "/conf.init"
+
+	err := os.MkdirAll(directoryPath, 0755)
 
 	if err != nil {
 		panic(err)
