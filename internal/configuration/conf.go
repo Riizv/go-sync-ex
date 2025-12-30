@@ -7,7 +7,7 @@ import (
 )
 
 func projectRootDirectory() string {
-	directoryPath := ""
+	var directoryPath string = ""
 
 	switch runtime.GOOS {
 	case "windows":
@@ -17,14 +17,14 @@ func projectRootDirectory() string {
 	case "linux":
 		directoryPath = "/opt/go-sync-ex.d"
 	default:
-		directoryPath = "opt/go-sync-ex.d"
+		directoryPath = "/opt/go-sync-ex.d"
 	}
 	return directoryPath
 }
 
 func ConfInit() {
 	directoryPath := projectRootDirectory()
-	filePath := directoryPath + "/conf.init"
+	var filePath string = directoryPath + "/conf.init"
 
 	err := os.MkdirAll(directoryPath, 0755)
 
@@ -52,7 +52,7 @@ func InitConfig() {
 	filePath := "/opt/go-sync-ex.d/conf.init"
 
 	// Open file and create if not exist
-	file, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+	file, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0744)
 	if err != nil {
 		panic(err)
 	}
@@ -64,7 +64,7 @@ func InitConfig() {
 	}(file)
 
 	// Save to file
-	_, err = file.WriteString("OS: " + runtime.GOOS)
+	_, err = file.WriteString("OS: " + runtime.GOOS + "\n")
 	if err != nil {
 		panic(err)
 	}

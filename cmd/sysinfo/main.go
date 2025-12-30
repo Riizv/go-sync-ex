@@ -21,9 +21,9 @@ func main() {
 	configuration.ConfInit()
 
 	// --- CLI flags ----------------------------------------------------------
-	port := flag.String("p", ":8080", "port na którym wystartuje serwer HTTP (np. ':8080')")
-	verbose := flag.Bool("v", false, "wypisz szczegóły systemu przy starcie")
-	debug := flag.Bool("d", false, "debug which show more informations")
+	port := flag.String("p", ":8080", "port for http server (eg. def ':8080')")
+	verbose := flag.Bool("v", false, "at program start list sys params")
+	debug := flag.Bool("d", false, "debug which show more information")
 	serverStart := flag.Bool("sS", false, "starting server")
 	//silent := flag.Bool("silent", false, "silent mode")
 	//coldStart := flag.Bool("coldStart", false, "boot once again")
